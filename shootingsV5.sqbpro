@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/flowe/OneDrive/Documents/MYSQL/Mass Shooting project/shootingsandvictims.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="6036"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,4:maindemo"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="blancdemo" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="89"/><column index="2" value="300"/><column index="3" value="214"/><column index="4" value="137"/><column index="5" value="231"/><column index="6" value="239"/><column index="7" value="300"/><column index="8" value="111"/><column index="9" value="211"/><column index="10" value="300"/><column index="11" value="300"/><column index="12" value="100"/><column index="13" value="85"/><column index="14" value="143"/><column index="15" value="225"/><column index="16" value="138"/><column index="17" value="300"/><column index="18" value="300"/><column index="19" value="284"/><column index="20" value="300"/><column index="21" value="195"/><column index="22" value="300"/><column index="23" value="289"/><column index="24" value="153"/><column index="25" value="84"/><column index="26" value="123"/><column index="27" value="130"/><column index="28" value="61"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="demo" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="89"/><column index="2" value="300"/><column index="3" value="214"/><column index="4" value="137"/><column index="5" value="231"/><column index="6" value="239"/><column index="7" value="300"/><column index="8" value="111"/><column index="9" value="211"/><column index="10" value="300"/><column index="11" value="300"/><column index="12" value="100"/><column index="13" value="85"/><column index="14" value="143"/><column index="15" value="225"/><column index="16" value="138"/><column index="17" value="300"/><column index="18" value="300"/><column index="19" value="284"/><column index="20" value="300"/><column index="21" value="195"/><column index="22" value="300"/><column index="23" value="289"/><column index="24" value="153"/><column index="25" value="84"/><column index="26" value="123"/><column index="27" value="130"/><column index="28" value="61"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="city">select * from blancdemo;
+
+--Number of mass shootings per US city
+select city, count(city) n 
+from blancdemo
+group by city
+order by n desc;
+
+</sql><sql name="state">-- Number of mass shootings per US state
+select distinct(state), count(state)s
+from blancdemo
+group by state
+order by s desc;
+
+-- Number of fatalities per US state in 2018, rounded
+select state,round(avg(fatalities),1)s , year
+from blancdemo
+where year = '2018'
+group by state
+order by s desc;
+ </sql><sql name="governor">-- Which governor has had to make the most public statements regarding a mass shooting in their state?
+select governor, count(governor) g
+from blancdemo
+group by governor
+order by g desc;
+</sql><sql name="partyaff">-- Number of mass shootings in Democratic vs Reupublican states
+select state_party_affiliation AS party, count(state_party_affiliation) demsvreps
+from blancdemo
+group by state_party_affiliation;</sql><sql name="name">-- How many shooters have the same first name?
+select distinct(shooter_first_name)n, count(shooter_first_name)first_name
+from blancdemo
+group by n
+order by count(shooter_first_name) desc;</sql><sql name="fatalities">-- Which city has had the most fatalities as a result of a mass shooting?
+select city, sum(fatalities)f 
+from blancdemo
+group by city
+order by f desc;
+
+
+-- Which state has had the most fatalities as a result of a mass shooting?
+select state, sum(fatalities)f 
+from blancdemo
+group by state
+order by f desc;
+
+
+
+</sql><sql name="injured">-- How many injuries have occured in U.S. cities as a result of a mass shooting?
+select city, sum(injured)i
+from blancdemo
+group by city
+order by i desc;
+
+-- How many injuries have occured in U.S. states as a result of a mass shooting?
+select state, sum(injured)i
+from blancdemo
+group by state
+order by i desc;</sql><sql name="total_victims">select city, sum(total_victims)v
+from blancdemo
+group by city
+order by v desc;
+
+select state, sum(total_victims)v
+from blancdemo
+group by state
+order by v desc;
+
+
+</sql><sql name="location_of_shooting">-- Where do mass shootings take place?
+select Distinct(location_of_shooting), count(location_of_shooting)s
+from blancdemo
+group by location_of_shooting 
+order by s desc;
+
+select *
+from blancdemo
+where location_of_shooting = 'Other'
+</sql><sql name="age">-- How old are the oldest and youngest shooter?
+select distinct(shooter_age)
+from blancdemo
+order by shooter_age ;
+
+-- What is the average age of the mass shooters in this dataset?
+select round(avg(shooter_age))
+from blancdemo</sql><sql name="prior_signs">-- In how many of these cases were prior mental health issues present?
+select distinct(prior_signs_mental_health_issues), count(prior_signs_mental_health_issues) i
+from blancdemo
+group by prior_signs_mental_health_issues
+order by i desc;</sql><sql name="legally_obtained">-- Were the guns legally obtained?
+select distinct(weapons_obtained_legally), count(weapons_obtained_legally)wp
+from blancdemo
+group by weapons_obtained_legally
+order by wp desc;
+</sql><sql name="where_obtained">-- Where are these weapons being purchased?
+select distinct(where_obtained), count(where_obtained)wo
+from blancdemo
+group by where_obtained
+order by wo desc;</sql><sql name="weapon_type">-- What types of weapons are used in mass shootings?
+select distinct(weapon_type), count(weapon_type)wp
+from blancdemo
+group by weapon_type
+order by wp desc</sql><sql name="race">-- What are the races of the shooters?
+select distinct(race), count(race)r
+from blancdemo
+group by race
+order by r desc;
+
+</sql><sql name="gender">-- What are the genders of these shooters?
+select distinct(gender), count(gender)
+from blancdemo
+group by gender</sql><sql name="year">-- What does the yearly trend look like for mass shootings in United States?
+select year, count(year)y
+from blancdemo
+group by year
+order by y desc;</sql><sql name="JOINS">select * 
+from vics;
+
+select * 
+from demo;
+
+select * 
+from vics v
+JOIN demo d on v.shooter_name = d.shooter_name;
+
+</sql><current_tab id="17"/></tab_sql></sqlb_project>
