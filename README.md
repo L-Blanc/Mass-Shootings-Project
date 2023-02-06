@@ -4,3 +4,4 @@ The files in this project are as follows:
 2. notebook.ipynb - Main project file
 3. shootingsV5.sqbpro - SQLite browser project file
 4. Mother Jones - Mass Shootings database - The original dataset from the [Mother Jones website](https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/)
+questions.ipynb - Notebook of python solutions to questions posed in the project.
