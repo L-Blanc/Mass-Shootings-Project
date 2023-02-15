@@ -5,4 +5,4 @@ The files in this project are as follows:
 3. shootingsV5.sqbpro - SQLite browser project file
 4. Mother Jones - Mass Shootings database - The original dataset from the [Mother Jones website](https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/)
 5. questions.ipynb - Notebook of python solutions to questions posed in the project.
-*Since this project was published a 140th mass shooting has occured (2/13/23 - Michigan State University, 3 fatalities and 5 injuries)
+Since this project was published a 140th mass shooting has occured (2/13/23 - Michigan State University, 3 fatalities and 5 injuries)
